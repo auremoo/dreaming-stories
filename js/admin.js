@@ -24,7 +24,9 @@ function formatDateA(s) {
 }
 
 function estimateRT(content) {
-  return Math.max(1, Math.ceil((content||'').trim().split(/\s+/).length / 200));
+  // Retire la syntaxe Markdown avant de compter les mots
+  const plain = (content||'').replace(/[#*_~`>\[\]()!]/g, ' ').replace(/\s+/g, ' ').trim();
+  return Math.max(1, Math.ceil(plain.split(' ').length / 200));
 }
 
 function genId(title) {
@@ -233,7 +235,7 @@ function openStoryModal(story = null) {
         <div class="form-group">
           <label for="f-content">Histoire</label>
           <textarea id="f-content" class="content-area" placeholder="L'histoire complète…\n\nSéparez les paragraphes avec une ligne vide.">${escA(story?.content||'')}</textarea>
-          <span class="hint">Ligne vide entre chaque paragraphe.</span>
+          <span class="hint">Markdown supporté — <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em">**gras**</code> <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em">*italique*</code> <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em"># Titre</code> — Ligne vide entre les paragraphes.</span>
         </div>
       </div>
       <div class="modal-footer">
@@ -286,10 +288,15 @@ function openStoryModal(story = null) {
   };
 }
 
+function renderMd(content) {
+  if (typeof marked !== 'undefined') return marked.parse(content, { breaks: false, gfm: true });
+  return content.split(/\n\n+/).filter(Boolean).map(p => `<p>${escA(p)}</p>`).join('');
+}
+
 function openPreview(title, content) {
   const ov = document.createElement('div');
   ov.className = 'modal-overlay';
-  const paras = content.split(/\n\n+/).filter(Boolean).map(p => `<p>${escA(p)}</p>`).join('');
+  const paras = renderMd(content);
   ov.innerHTML = `
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modal-header">

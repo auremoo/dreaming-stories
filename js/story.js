@@ -13,6 +13,10 @@ function escS(str) {
 }
 
 function renderContent(content) {
+  if (typeof marked !== 'undefined') {
+    return marked.parse(content, { breaks: false, gfm: true });
+  }
+  // Fallback sans marked
   return content.split(/\n\n+/).map(p => p.trim()).filter(Boolean).map(p => `<p>${escS(p)}</p>`).join('');
 }
 

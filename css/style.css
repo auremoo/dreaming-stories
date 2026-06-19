@@ -471,6 +471,29 @@ body::before {
   color: #cbd5e1;
 }
 .story-content p { margin-bottom: 1.7em; }
+.story-content h2, .story-content h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--text);
+  margin: 2em 0 0.7em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.story-content h2 { font-size: 1.4rem; }
+.story-content h3 { font-size: 1.15rem; }
+.story-content strong { color: var(--text); font-weight: 600; }
+.story-content em { font-style: italic; color: #d1d5db; }
+.story-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 20px;
+  margin: 1.5em 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.story-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
 .story-content p:first-child::first-letter {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 3.2em;
