@@ -8,31 +8,69 @@
   <link rel="apple-touch-icon" href="assets/icon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress"></div>
   <canvas id="stars" aria-hidden="true"></canvas>
 
-  <header class="site-header" role="banner">
-    <a href="index.html" class="logo">
-      <img src="assets/icon.jpg" alt="" class="logo-icon" aria-hidden="true">
-      <span>Dreaming Stories</span>
-    </a>
-    <a href="admin.html" class="admin-link" title="Administration">Administration</a>
-  </header>
-
-  <main>
-    <div class="story-page">
-      <div class="prose-container" id="story-container" role="main">
-        <div class="loading" role="status">Chargement de l'histoire…</div>
+  <div class="app">
+    <!-- Sidebar (desktop) -->
+    <aside class="sidebar" role="navigation" aria-label="Navigation principale">
+      <div class="sidebar-logo">
+        <img src="assets/icon.jpg" alt="" class="sidebar-logo-img" aria-hidden="true">
+        <span class="sidebar-logo-text">Dreaming Stories</span>
       </div>
-    </div>
-  </main>
 
-  <footer role="contentinfo">
-    <p>Histoires générées à partir de rêves réels &middot; Rédigées avec l'aide d'une IA</p>
-  </footer>
+      <span class="sidebar-section">Navigation</span>
+      <a href="index.html" class="sidebar-link">
+        <span class="link-icon">🌙</span> Histoires
+      </a>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-footer">
+        <span class="sidebar-section" style="padding-top:0">Admin</span>
+        <a href="admin.html" class="sidebar-link">
+          <span class="link-icon">⚙️</span> Administration
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="app-main">
+      <!-- Mobile header -->
+      <header class="mobile-header" role="banner">
+        <a href="index.html" class="mobile-logo">
+          <img src="assets/icon.jpg" alt="" class="mobile-logo-img">
+          <span class="mobile-logo-text">Dreaming Stories</span>
+        </a>
+      </header>
+
+      <main>
+        <div class="page-content prose" id="story-container" role="main">
+          <div class="loading" role="status">Chargement de l'histoire…</div>
+        </div>
+      </main>
+
+      <footer role="contentinfo">
+        <p>Histoires générées à partir de rêves réels &middot; Rédigées avec l'aide d'une IA</p>
+      </footer>
+    </div>
+
+    <!-- Bottom nav (mobile) -->
+    <nav class="bottom-nav" role="navigation" aria-label="Navigation mobile">
+      <a href="index.html" class="bottom-nav-item">
+        <span class="bottom-nav-icon">🌙</span>
+        <span>Histoires</span>
+      </a>
+      <a href="admin.html" class="bottom-nav-item">
+        <span class="bottom-nav-icon">⚙️</span>
+        <span>Admin</span>
+      </a>
+    </nav>
+  </div>
 
   <script src="js/story.js"></script>
 </body>
