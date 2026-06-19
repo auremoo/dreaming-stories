@@ -236,7 +236,11 @@ function openStoryModal(story = null) {
           <textarea id="f-excerpt" placeholder="Une courte phrase d'accroche…" maxlength="220" rows="3">${escA(story?.excerpt||'')}</textarea>
         </div>
         <div class="form-group">
-          <label for="f-content">Histoire</label>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <label for="f-content">Histoire</label>
+            <label for="f-import" class="btn btn-secondary btn-small" style="cursor:pointer;margin-bottom:0">📎 Importer .md</label>
+            <input type="file" id="f-import" accept=".md,.txt" style="display:none">
+          </div>
           <textarea id="f-content" class="content-area" placeholder="L'histoire complète…\n\nSéparez les paragraphes avec une ligne vide.">${escA(story?.content||'')}</textarea>
           <span class="hint">Markdown supporté — <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em">**gras**</code> <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em">*italique*</code> <code style="background:rgba(167,139,250,0.1);padding:1px 5px;border-radius:4px;font-size:0.85em"># Titre</code> — Ligne vide entre les paragraphes.</span>
         </div>
@@ -258,6 +262,28 @@ function openStoryModal(story = null) {
   updateCount();
   excerptEl.addEventListener('input', updateCount);
   contentEl.addEventListener('input', () => { rtEl.value = estimateRT(contentEl.value); });
+
+  // Import fichier .md
+  ov.querySelector('#f-import').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      let text = ev.target.result.trim();
+      const titleField = ov.querySelector('#f-title');
+      // Si la première ligne est un # Titre et que le champ titre est vide, on l'extrait
+      const firstLine = text.split('\n')[0];
+      if (firstLine.startsWith('# ') && !titleField.value.trim()) {
+        titleField.value = firstLine.replace(/^#\s+/, '').trim();
+        text = text.slice(firstLine.length).trim();
+      }
+      contentEl.value = text;
+      rtEl.value = estimateRT(text);
+      updateCount();
+    };
+    reader.readAsText(file, 'UTF-8');
+    e.target.value = ''; // reset pour pouvoir réimporter le même fichier
+  });
 
   ov.querySelector('#m-close').onclick = () => ov.remove();
   ov.querySelector('#m-cancel').onclick = () => ov.remove();
