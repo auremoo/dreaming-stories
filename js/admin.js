@@ -72,7 +72,11 @@ async function githubPut(stories, token) {
       body: JSON.stringify({ message: '✦ Mise à jour des histoires', content: utf8ToB64(json), sha: file.sha })
     }
   );
-  if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.message || `Erreur ${res.status}`); }
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body.message || `Erreur ${res.status}`);
+  const sha = body.commit?.sha?.substring(0, 7);
+  if (!sha) throw new Error('Commit introuvable dans la réponse GitHub');
+  return sha;
 }
 
 async function githubImport(token) {
@@ -359,13 +363,13 @@ async function publishToGitHub(stories) {
 
   const t = toast('Publication en cours…', 'loading');
   try {
-    await githubPut(stories, pat);
+    const sha = await githubPut(stories, pat);
     t.remove();
-    toast('Publié sur GitHub ! 🚀', 'success');
+    toast(`Publié ! Commit ${sha} 🚀`, 'success');
   } catch (err) {
     t.remove();
     toast(`Erreur : ${err.message}`, 'error');
-    console.error(err);
+    console.error('GitHub publish error:', err);
   }
 }
 
