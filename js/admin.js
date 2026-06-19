@@ -46,7 +46,10 @@ function setPAT(t) { t ? localStorage.setItem(PAT_KEY, t) : localStorage.removeI
 
 /* ===== GITHUB API ===== */
 function utf8ToB64(str) {
-  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p) => String.fromCharCode('0x'+p)));
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
 }
 
 async function githubGet(token) {
