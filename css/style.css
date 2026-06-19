@@ -898,6 +898,26 @@ label {
     font-size: 16px !important;
   }
 
+  /* Corrige le débordement du champ date sur iOS */
+  input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+
+  .modal-body, .form-group, .form-row {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   .page-content { padding: 24px 20px 60px; }
   .page-content.prose { padding: 20px 20px 60px; }
 
