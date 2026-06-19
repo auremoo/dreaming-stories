@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration — Dreaming Stories</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <!-- Password Gate -->
+  <div id="password-gate" class="password-gate" role="dialog" aria-modal="true" aria-label="Connexion admin">
+    <div class="password-card">
+      <span class="logo-moon" aria-hidden="true">◗</span>
+      <h2>Administration</h2>
+      <p>Entrez le mot de passe pour accéder au panneau de gestion des histoires.</p>
+      <input
+        type="password"
+        id="password-input"
+        class="input-field"
+        placeholder="••••••"
+        autocomplete="current-password"
+        aria-label="Mot de passe"
+      >
+      <button class="btn btn-primary" id="login-btn">Connexion</button>
+    </div>
+  </div>
+
+  <!-- Admin Content (hidden until logged in) -->
+  <div id="admin-content">
+    <header class="admin-header" role="banner">
+      <div class="admin-logo">
+        <span aria-hidden="true">◗</span>
+        Dreaming Stories
+        <span class="badge">Admin</span>
+      </div>
+      <nav class="admin-nav">
+        <a href="index.html" class="btn btn-secondary btn-small">Voir le site</a>
+        <button class="btn btn-ghost btn-small" id="import-repo-btn" title="Réimporter depuis stories.json">↓ Importer dépôt</button>
+        <button class="btn btn-ghost btn-small" id="logout-btn">Déconnexion</button>
+      </nav>
+    </header>
+
+    <main class="admin-main" role="main">
+      <div class="toolbar">
+        <h1 class="toolbar-title">
+          Histoires
+          <span id="stories-count" style="font-size:1rem;color:var(--text-dim);font-family:'Inter',sans-serif;font-weight:300;margin-left:8px"></span>
+        </h1>
+        <button class="btn btn-primary" id="new-story-btn">
+          + Nouvelle histoire
+        </button>
+      </div>
+
+      <div class="admin-stories" id="admin-stories" role="list">
+        <div class="loading" role="status">Chargement…</div>
+      </div>
+
+      <!-- Export Section -->
+      <div class="export-section" aria-label="Exporter les histoires">
+        <h3>Publier les histoires</h3>
+        <p>
+          Les histoires sont sauvegardées localement dans votre navigateur.
+          Pour les rendre visibles à tous les visiteurs, exportez le JSON et
+          mettez à jour le fichier <code style="background:rgba(167,139,250,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em">data/stories.json</code> dans votre dépôt GitHub.
+        </p>
+        <ol class="export-steps">
+          <li>
+            <span class="step-num">1</span>
+            Cliquez sur "Exporter le JSON" et copiez le contenu
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            Allez sur GitHub → votre dépôt → fichier <code style="background:rgba(167,139,250,0.1);padding:2px 6px;border-radius:4px;font-size:0.8em">data/stories.json</code>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            Éditez le fichier (icône crayon) et remplacez tout le contenu par le JSON copié
+          </li>
+          <li>
+            <span class="step-num">4</span>
+            "Commit changes" — les histoires sont en ligne en quelques secondes !
+          </li>
+        </ol>
+        <button class="btn btn-primary" id="export-btn">
+          🚀 Exporter le JSON
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

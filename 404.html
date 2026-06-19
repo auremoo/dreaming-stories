@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page introuvable — Dreaming Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="page-404" role="main">
+    <span class="moon-huge" aria-hidden="true">🌑</span>
+    <h1>Cette page s'est perdue dans les rêves…</h1>
+    <p>La page que vous cherchez n'existe pas ou a disparu.</p>
+    <a href="index.html" class="btn btn-primary" style="display:inline-flex;max-width:240px">
+      ← Retour aux histoires
+    </a>
+  </div>
+  <script>
+    const c=document.getElementById('stars'),x=c.getContext('2d');
+    let W,H,stars;
+    function init(){W=c.width=innerWidth;H=c.height=innerHeight;stars=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,p:Math.random()*6.28,s:Math.random()*.006+.002,b:Math.random()*.5+.3}));}
+    init();window.onresize=init;
+    (function draw(){x.clearRect(0,0,W,H);const n=performance.now()/1e3;for(const s of stars){const a=s.b*(.5+.5*Math.sin(n*s.s*6+s.p));x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fillStyle=`rgba(167,139,250,${a})`;x.fill();}requestAnimationFrame(draw);})();
+  </script>
+</body>
+</html>

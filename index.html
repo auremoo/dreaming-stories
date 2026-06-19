@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreaming Stories</title>
+  <meta name="description" content="Des rêves racontés à une IA, transformés en histoires. Une collection personnelle de récits oniriques.">
+  <meta property="og:title" content="Dreaming Stories">
+  <meta property="og:description" content="Des rêves racontés à une IA, transformés en histoires.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header" role="banner">
+    <a href="index.html" class="logo">
+      <span class="logo-moon" aria-hidden="true">◗</span>
+      <span>Dreaming Stories</span>
+    </a>
+    <a href="admin.html" class="admin-link" title="Administration">Administration</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Introduction">
+      <div class="container">
+        <div class="hero-tag">
+          <span aria-hidden="true">✦</span>
+          Journal de rêves
+        </div>
+        <h1>Des rêves<br><em>mis en récit</em></h1>
+        <p class="hero-desc">
+          Je raconte mes rêves à une intelligence artificielle, qui les transforme en histoires.
+          Voici la collection qui en résulte — un archipel de nuits imaginaires.
+        </p>
+      </div>
+    </section>
+
+    <section class="stories-section" aria-label="Histoires">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Toutes les histoires</h2>
+          <span class="story-count" aria-live="polite"></span>
+        </div>
+        <div class="stories-grid" id="stories-grid" role="list">
+          <div class="loading" role="status">Chargement des histoires…</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>Histoires générées à partir de rêves réels &middot; Rédigées avec l'aide d'une IA</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
