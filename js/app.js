@@ -1,3 +1,4 @@
+// Dreaming Stories — Auteur : Aurélien Moote - Moo - 2026 — Licence MIT
 const MOONS = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
 function getMoon(i) { return MOONS[i % MOONS.length]; }
 
